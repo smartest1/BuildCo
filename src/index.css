@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 210 40% 32%;
+    --color-primary-foreground: 0 0% 98%;
+    --color-secondary: 210 45% 20%;
+    --color-secondary-foreground: 0 0% 100%;
+    --color-tertiary: 36 85% 50%;
+    --color-tertiary-foreground: 0 0% 10%;
+    --color-neutral: 0 0% 96%;
+    --color-neutral-foreground: 210 15% 25%;
+    --color-success: 145 45% 35%;
+    --color-warning: 30 80% 45%;
+    --color-background: 0 0% 100%;
+    --color-foreground: 210 25% 10%;
+    --color-border: 210 10% 80%;
+    --color-input: 210 10% 80%;
+    --color-ring: 36 85% 50%;
+    --color-muted: 0 0% 96%;
+    --color-muted-foreground: 210 8% 50%;
+    --color-accent: 36 85% 50%;
+    --color-accent-foreground: 0 0% 10%;
+    --color-destructive: 0 84% 60%;
+    --color-destructive-foreground: 0 0% 98%;
+    --color-popover: 0 0% 100%;
+    --color-popover-foreground: 210 25% 10%;
+    --color-card: 0 0% 100%;
+    --color-card-foreground: 210 25% 10%;
+    
+    --font-sans: 'Poppins', sans-serif;
+    --font-body: 'Lato', sans-serif;
+    
+    --radius: 8px;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  html,
+  body {
+    @apply bg-background text-foreground font-body;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans text-foreground;
+  }
+  
+  p, span, div, a {
+    @apply text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
