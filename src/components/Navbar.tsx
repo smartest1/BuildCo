@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MenuIcon, XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -65,15 +66,23 @@ const Navbar = () => {
           <div className="hidden md:block">
             <NavigationMenu>
               <NavigationMenuList className="flex space-x-2">
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
-                      <button
+                      <motion.button
                         onClick={() => scrollToSection(item.id)}
-                        className="px-4 py-3 text-secondary-foreground font-body font-normal hover:text-tertiary transition-colors duration-200 cursor-pointer"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className="px-4 py-3 text-secondary-foreground font-body font-normal relative group cursor-pointer"
                       >
                         {item.label}
-                      </button>
+                        <motion.span
+                          className="absolute bottom-0 left-0 w-0 h-0.5 bg-tertiary"
+                          whileHover={{ width: '100%' }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.button>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
@@ -82,12 +91,18 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:block">
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-tertiary text-tertiary-foreground font-body font-normal hover:bg-tertiary/90 transition-colors duration-200"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
             >
-              Request a Quote
-            </Button>
+              <Button
+                onClick={() => scrollToSection('contact')}
+                className="bg-tertiary text-tertiary-foreground font-body font-normal hover:bg-tertiary/90 transition-colors duration-200"
+              >
+                Request a Quote
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}
@@ -109,34 +124,52 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation MenuIcon */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-secondary border-t border-gray-700">
-          <NavigationMenu className="w-full">
-            <NavigationMenuList className="flex flex-col w-full space-y-0">
-              {navItems.map((item) => (
-                <NavigationMenuItem key={item.id} className="w-full">
-                  <NavigationMenuLink asChild>
-                    <button
-                      onClick={() => scrollToSection(item.id)}
-                      className="w-full text-left px-8 py-4 text-secondary-foreground font-body font-normal hover:bg-primary hover:text-primary-foreground transition-colors duration-200 cursor-pointer"
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-secondary border-t border-gray-700 overflow-hidden"
+          >
+            <NavigationMenu className="w-full">
+              <NavigationMenuList className="flex flex-col w-full space-y-0">
+                {navItems.map((item, index) => (
+                  <NavigationMenuItem key={item.id} className="w-full">
+                    <NavigationMenuLink asChild>
+                      <motion.button
+                        onClick={() => scrollToSection(item.id)}
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className="w-full text-left px-8 py-4 text-secondary-foreground font-body font-normal hover:bg-primary hover:text-primary-foreground transition-colors duration-200 cursor-pointer"
+                      >
+                        {item.label}
+                      </motion.button>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+                <NavigationMenuItem className="w-full px-8 py-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navItems.length * 0.05 }}
+                    className="w-full"
+                  >
+                    <Button
+                      onClick={() => scrollToSection('contact')}
+                      className="w-full bg-tertiary text-tertiary-foreground font-body font-normal hover:bg-tertiary/90 transition-colors duration-200"
                     >
-                      {item.label}
-                    </button>
-                  </NavigationMenuLink>
+                      Request a Quote
+                    </Button>
+                  </motion.div>
                 </NavigationMenuItem>
-              ))}
-              <NavigationMenuItem className="w-full px-8 py-4">
-                <Button
-                  onClick={() => scrollToSection('contact')}
-                  className="w-full bg-tertiary text-tertiary-foreground font-body font-normal hover:bg-tertiary/90 transition-colors duration-200"
-                >
-                  Request a Quote
-                </Button>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-      )}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

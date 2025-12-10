@@ -77,21 +77,29 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.05, y: -10 }}
               className="cursor-pointer"
             >
-              <Card className="h-full overflow-hidden border-border hover:border-tertiary transition-all duration-200 ease-in">
-                <div className="relative h-64 overflow-hidden">
-                  <img
+              <Card className="h-full overflow-hidden border-border hover:border-tertiary transition-all duration-300 ease-in shadow-md hover:shadow-xl">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <motion.img
                     src={service.image}
                     alt={service.alt}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading="lazy"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
                   />
                 </div>
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
-                    <service.icon className="w-12 h-12 text-tertiary mr-4" strokeWidth={1.5} />
+                    <motion.div
+                      initial={{ rotate: 0 }}
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <service.icon className="w-12 h-12 text-tertiary mr-4" strokeWidth={1.5} />
+                    </motion.div>
                     <h3 className="text-2xl font-bold text-foreground">
                       {service.title}
                     </h3>

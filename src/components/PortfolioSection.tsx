@@ -103,28 +103,43 @@ const PortfolioSection = () => {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="portfolio-item relative group overflow-hidden rounded-lg cursor-pointer h-80"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              className="portfolio-item relative group overflow-hidden rounded-lg cursor-pointer h-80 border-2 border-transparent hover:border-tertiary transition-colors duration-300"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.08 }}
             >
-              <img
+              <motion.img
                 src={project.image}
                 alt={project.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover"
                 loading="lazy"
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.5 }}
               />
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-8">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-transparent"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  className="absolute bottom-0 left-0 right-0 p-8"
+                  initial={{ y: 50, opacity: 0 }}
+                  whileHover={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <h3 className="text-xl font-bold text-secondary-foreground mb-2">
                     {project.title}
                   </h3>
                   <p className="text-sm text-secondary-foreground/90 font-body">
                     {project.location}
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

@@ -78,41 +78,77 @@ const OverviewSection = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8">
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0 }}
+              >
+                <motion.div
+                  className="flex justify-center mb-3"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1, type: 'spring', stiffness: 200 }}
+                >
                   <AwardIcon className="w-12 h-12 text-tertiary" strokeWidth={1.5} />
-                </div>
+                </motion.div>
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                   {yearsCount}+
                 </div>
                 <div className="text-sm text-neutral-foreground font-body">
                   Years Experience
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <motion.div
+                  className="flex justify-center mb-3"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2, type: 'spring', stiffness: 200 }}
+                >
                   <Building2Icon className="w-12 h-12 text-tertiary" strokeWidth={1.5} />
-                </div>
+                </motion.div>
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                   {projectsCount}+
                 </div>
                 <div className="text-sm text-neutral-foreground font-body">
                   Projects Completed
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <motion.div
+                  className="flex justify-center mb-3"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3, type: 'spring', stiffness: 200 }}
+                >
                   <UsersIcon className="w-12 h-12 text-tertiary" strokeWidth={1.5} />
-                </div>
+                </motion.div>
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                   {clientsCount}+
                 </div>
                 <div className="text-sm text-neutral-foreground font-body">
                   Happy Clients
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 

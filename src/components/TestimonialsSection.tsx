@@ -102,53 +102,64 @@ const TestimonialsSection = () => {
                   "{testimonials[currentIndex].quote}"
                 </blockquote>
                 
-                <div className="space-y-2">
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
                   <p className="text-lg font-bold text-primary">
                     {testimonials[currentIndex].author}
                   </p>
                   <p className="text-base text-muted-foreground font-body">
                     {testimonials[currentIndex].company}
                   </p>
-                </div>
+                </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Navigation Buttons */}
           <div className="flex justify-center items-center gap-4 mt-12">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPrevious}
-              className="bg-background text-foreground border-border hover:bg-neutral hover:text-foreground hover:border-tertiary transition-colors duration-200"
-            >
-              <ChevronLeftIcon className="w-6 h-6" strokeWidth={1.5} />
-            </Button>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={goToPrevious}
+                className="bg-background text-foreground border-border hover:bg-neutral hover:text-foreground hover:border-tertiary transition-colors duration-200"
+              >
+                <ChevronLeftIcon className="w-6 h-6" strokeWidth={1.5} />
+              </Button>
+            </motion.div>
 
             {/* Dots */}
             <div className="flex gap-3">
               {testimonials.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-200 ${
                     index === currentIndex
-                      ? 'bg-tertiary w-8'
+                      ? 'bg-tertiary'
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
+                  animate={index === currentIndex ? { width: 32 } : { width: 12 }}
+                  whileHover={{ scale: 1.2 }}
                 />
               ))}
             </div>
 
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNext}
-              className="bg-background text-foreground border-border hover:bg-neutral hover:text-foreground hover:border-tertiary transition-colors duration-200"
-            >
-              <ChevronRightIcon className="w-6 h-6" strokeWidth={1.5} />
-            </Button>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={goToNext}
+                className="bg-background text-foreground border-border hover:bg-neutral hover:text-foreground hover:border-tertiary transition-colors duration-200"
+              >
+                <ChevronRightIcon className="w-6 h-6" strokeWidth={1.5} />
+              </Button>
+            </motion.div>
           </div>
         </div>
       </div>

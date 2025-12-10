@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FacebookIcon, TwitterIcon, LinkedinIcon, InstagramIcon } from 'lucide-react';
 
 const Footer = () => {
@@ -22,7 +23,13 @@ const Footer = () => {
       <div className="max-w-screen-xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
-          <div className="md:col-span-2">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-2"
+          >
             <h3 className="text-2xl font-bold text-secondary-foreground mb-6">
               BuildCo
             </h3>
@@ -30,130 +37,132 @@ const Footer = () => {
               Building the future with excellence, integrity, and innovation. Your trusted partner in construction for over 20 years.
             </p>
             <div className="flex gap-6">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground hover:text-tertiary transition-colors duration-200"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-8 h-8" strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground hover:text-tertiary transition-colors duration-200"
-                aria-label="Twitter"
-              >
-                <TwitterIcon className="w-8 h-8" strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground hover:text-tertiary transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="w-8 h-8" strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground hover:text-tertiary transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-8 h-8" strokeWidth={1.5} />
-              </a>
+              {[
+                { Icon: FacebookIcon, link: 'https://facebook.com', label: 'Facebook' },
+                { Icon: TwitterIcon, link: 'https://twitter.com', label: 'Twitter' },
+                { Icon: LinkedinIcon, link: 'https://linkedin.com', label: 'LinkedIn' },
+                { Icon: InstagramIcon, link: 'https://instagram.com', label: 'Instagram' },
+              ].map(({ Icon, link, label }, index) => (
+                <motion.a
+                  key={label}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary-foreground hover:text-tertiary transition-colors duration-200"
+                  aria-label={label}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: 'spring', stiffness: 200 }}
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                >
+                  <Icon className="w-8 h-8" strokeWidth={1.5} />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h4 className="text-lg font-bold text-secondary-foreground mb-6">
               Quick Links
             </h4>
             <ul className="space-y-4">
-              <li>
-                <button
-                  onClick={() => scrollToSection('overview')}
-                  className="text-base text-secondary-foreground/90 hover:text-tertiary transition-colors duration-200 font-body cursor-pointer"
+              {[
+                { label: 'About Us', id: 'overview' },
+                { label: 'Services', id: 'services' },
+                { label: 'Portfolio', id: 'portfolio' },
+                { label: 'Contact', id: 'contact' },
+              ].map((item, index) => (
+                <motion.li
+                  key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ x: 10 }}
                 >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('services')}
-                  className="text-base text-secondary-foreground/90 hover:text-tertiary transition-colors duration-200 font-body cursor-pointer"
-                >
-                  Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('portfolio')}
-                  className="text-base text-secondary-foreground/90 hover:text-tertiary transition-colors duration-200 font-body cursor-pointer"
-                >
-                  Portfolio
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="text-base text-secondary-foreground/90 hover:text-tertiary transition-colors duration-200 font-body cursor-pointer"
-                >
-                  Contact
-                </button>
-              </li>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-base text-secondary-foreground/90 hover:text-tertiary transition-colors duration-200 font-body cursor-pointer"
+                  >
+                    {item.label}
+                  </button>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h4 className="text-lg font-bold text-secondary-foreground mb-6">
               Services
             </h4>
             <ul className="space-y-4">
-              <li className="text-base text-secondary-foreground/90 font-body">
-                Residential Construction
-              </li>
-              <li className="text-base text-secondary-foreground/90 font-body">
-                Commercial Projects
-              </li>
-              <li className="text-base text-secondary-foreground/90 font-body">
-                Infrastructure Development
-              </li>
-              <li className="text-base text-secondary-foreground/90 font-body">
-                Renovations & Remodeling
-              </li>
+              {[
+                'Residential Construction',
+                'Commercial Projects',
+                'Infrastructure Development',
+                'Renovations & Remodeling',
+              ].map((service, index) => (
+                <motion.li
+                  key={service}
+                  className="text-base text-secondary-foreground/90 font-body"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  {service}
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-700">
+        <motion.div
+          className="pt-8 border-t border-gray-700"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-secondary-foreground/80 font-body">
               © {currentYear} BuildCo. All rights reserved.
             </p>
             <div className="flex gap-8">
-              <a
-                href="#"
-                className="text-sm text-secondary-foreground/80 hover:text-tertiary transition-colors duration-200 font-body"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-sm text-secondary-foreground/80 hover:text-tertiary transition-colors duration-200 font-body"
-              >
-                Terms of Service
-              </a>
+              {[
+                { label: 'Privacy Policy', href: '#' },
+                { label: 'Terms of Service', href: '#' },
+              ].map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm text-secondary-foreground/80 hover:text-tertiary transition-colors duration-200 font-body"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.05 }}
+                  whileHover={{ x: 5 }}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
